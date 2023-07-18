@@ -9,6 +9,7 @@ namespace api_biblioteca.Models
     {
         public string Titulo { get; set; }
         public string Autor { get; set; }
+        public string AnoLancamento { get; set; }
         public string UrlImage { get; set; }
         public bool isAlugado {get; set;}
 
