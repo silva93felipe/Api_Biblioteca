@@ -23,7 +23,7 @@ namespace api_biblioteca.Controllers
             var biblioteca = _bibliotecaRepository.GetAll();
 
             if(biblioteca is null){
-                return NotFound();
+                return NotFound(new {message = "Nenhuma biblioteca cadastrada."});
             }
             return Ok(biblioteca);
         }

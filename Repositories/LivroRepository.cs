@@ -10,24 +10,38 @@ namespace api_biblioteca.Repositories
     public class LivroRepository
     {
         public IEnumerable<Livro> GetAllLivros(){
-            return BibliotecaContext.biblioteca.Livros.Where(l => !l.isAlugado);
+            return BibliotecaContext.biblioteca.Livros.Where(l => !l.IsAlugado);
         }
 
         public void Create(Livro livro){
             BibliotecaContext.biblioteca.Livros.Add(livro);
         }
 
-        public void Alugar(int livroId){
+        public void Alugar(int livroId, DateTime dataAluguel){
             var livro = BibliotecaContext.biblioteca.Livros.Find(l => l.Id == livroId);
+
             if(livro != null){
-                livro.isAlugado = true;
+                livro.IsAlugado = true;
+                var aluguel = new Aluguel();
+                aluguel.LivroId = livro.Id;
+                aluguel.DataAluguel = dataAluguel;
+                BibliotecaContext.Alugueis.Add(aluguel);
             }
         }
 
-        public void Devolver(int livroId){
+        public void Devolver(int livroId, DateTime dataEntrega){
             var livro = BibliotecaContext.biblioteca.Livros.Find(l => l.Id == livroId);
+            
             if(livro != null){
-                livro.isAlugado = false;
+                var aluguel = BibliotecaContext.Alugueis.Find( l => l.Id == livro.Id && l.Ativo);
+                
+                if(aluguel != null){
+                    aluguel.Ativo = false;
+                    aluguel.DataEntrega = dataEntrega;
+
+                }
+
+                livro.IsAlugado = false;
             }
         }
 

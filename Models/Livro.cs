@@ -11,11 +11,11 @@ namespace api_biblioteca.Models
         public string Autor { get; set; }
         public string AnoLancamento { get; set; }
         public string UrlImage { get; set; }
-        public bool isAlugado {get; set;}
+        public bool IsAlugado {get; set;}
 
         public Livro()
         {
-            isAlugado = false;
+            IsAlugado = false;
         }
     }
 }

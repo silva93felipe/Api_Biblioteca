@@ -9,15 +9,15 @@ namespace api_biblioteca.Repositories
 {
     public class BibliotecaRepository
     {
-        private readonly BibliotecaContext _bibliotecaContext;
-
         public Biblioteca GetAll(){
             return BibliotecaContext.biblioteca;
         }
 
         public void Create(Biblioteca biblioteca){
-            BibliotecaContext.biblioteca.Descricao = biblioteca.Descricao;
-            BibliotecaContext.biblioteca.Id = biblioteca.Id;
+            Biblioteca bibliotecaNew = new Biblioteca();
+            bibliotecaNew.Descricao = biblioteca.Descricao;
+            bibliotecaNew.Id =  biblioteca.Id;
+            BibliotecaContext.biblioteca = bibliotecaNew;
             
         }
     }

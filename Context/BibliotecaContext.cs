@@ -8,6 +8,7 @@ namespace api_biblioteca.Context
 {
     public class BibliotecaContext
     {
-        public static Biblioteca  biblioteca = new Biblioteca();
+        public static Biblioteca  biblioteca;
+        public static List<Aluguel>  Alugueis = new List<Aluguel>();
     }
 }

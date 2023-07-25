@@ -41,7 +41,6 @@ namespace api_biblioteca.Controllers
             return false;
         }
 
-
         [HttpPost]
         public IActionResult Create(Livro livro){
             var haveBiblioteca = HaveBibliotecaCreate();
@@ -55,20 +54,20 @@ namespace api_biblioteca.Controllers
         }
 
 
-        [HttpPost("Alugar/{livroId}")]
-        public IActionResult Alugar(int livroId){
+        [HttpPost("Alugar")]
+        public IActionResult Alugar(int livroId, DateTime dataAluguel){
             var haveBiblioteca = HaveBibliotecaCreate();
 
             if(!haveBiblioteca){
                 return Unauthorized(new { Message = "Nenhuma biblioteca cadastrada."} );
             }
 
-            _livroRepository.Alugar(livroId);
+            _livroRepository.Alugar(livroId, dataAluguel);
             return Ok();
         }
 
-        [HttpPost("Devolver/{livroId}")]
-        public IActionResult Devolver(int livroId){
+        [HttpPost("Devolver")]
+        public IActionResult Devolver(int livroId, DateTime dataEntrega){
 
             var haveBiblioteca = HaveBibliotecaCreate();
 
@@ -76,7 +75,7 @@ namespace api_biblioteca.Controllers
                return Unauthorized(new { Message = "Nenhuma biblioteca cadastrada."} );
             }
             
-            _livroRepository.Devolver(livroId);
+            _livroRepository.Devolver(livroId, dataEntrega);
             return Ok();
         }
 
