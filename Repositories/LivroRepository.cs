@@ -9,39 +9,38 @@ namespace api_biblioteca.Repositories
 {
     public class LivroRepository
     {
+        private readonly AlugarRepository _alugarRepository;
+
+        public LivroRepository()
+        {
+            _alugarRepository = new AlugarRepository();
+        }
         public IEnumerable<Livro> GetAllLivros(){
-            return BibliotecaContext.biblioteca.Livros.Where(l => !l.IsAlugado);
+            return BibliotecaContext.Livros.Where (l => !l.IsAlugado).ToList();
         }
 
         public void Create(Livro livro){
-            BibliotecaContext.biblioteca.Livros.Add(livro);
+            BibliotecaContext.Livros.Add(livro);
         }
 
-        public void Alugar(int livroId, DateTime dataAluguel){
-            var livro = BibliotecaContext.biblioteca.Livros.Find(l => l.Id == livroId);
+        public void Alugar(Guid livroId){
+            var livro = BibliotecaContext.Livros.Find(l => l.Id == livroId);
 
             if(livro != null){
-                livro.IsAlugado = true;
-                var aluguel = new Aluguel();
-                aluguel.LivroId = livro.Id;
-                aluguel.DataAluguel = dataAluguel;
-                BibliotecaContext.Alugueis.Add(aluguel);
+                livro.Alugar();
+
+                _alugarRepository.Alugar(livroId);
             }
         }
 
-        public void Devolver(int livroId, DateTime dataEntrega){
-            var livro = BibliotecaContext.biblioteca.Livros.Find(l => l.Id == livroId);
+        public void Devolver(Guid livroId){
+            var livro = BibliotecaContext.Livros.Find(l => l.Id == livroId);
             
             if(livro != null){
-                var aluguel = BibliotecaContext.Alugueis.Find( l => l.Id == livro.Id && l.Ativo);
+                var aluguel = _alugarRepository.GetAluguelByLivroId(livro.Id);
                 
-                if(aluguel != null){
-                    aluguel.Ativo = false;
-                    aluguel.DataEntrega = dataEntrega;
-
-                }
-
-                livro.IsAlugado = false;
+                aluguel?.Entregar();
+                livro.Devolver();
             }
         }
 

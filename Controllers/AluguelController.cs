@@ -11,12 +11,11 @@ namespace api_biblioteca.Controllers
     [Route("api/[controller]")]
     public class AluguelController : ControllerBase
     {
-
         private readonly AlugarRepository _alugarRepository;
 
-        public AluguelController(AlugarRepository alugarRepository)
+        public AluguelController()
         {
-            _alugarRepository = alugarRepository;
+            _alugarRepository =  new AlugarRepository();
         }
 
         [HttpGet]
@@ -25,8 +24,19 @@ namespace api_biblioteca.Controllers
         }
 
         [HttpGet("{livroId}")]
-        public IActionResult GetAlugueisByLivroId(int livroId, DateTime? dataInicio, DateTime dataFim){
-            return Ok(_alugarRepository.GetAlugueisByLivroId(livroId));
+        public IActionResult GetAluguelByLivroId(Guid livroId){
+            return Ok(_alugarRepository.GetAluguelByLivroId(livroId));
+        }
+
+        [HttpGet("{livroId}")]
+        public IActionResult GetAlugueisByLivroIdByPeriodo(Guid livroId, DateTime dataInicio, DateTime dataFim){
+            return Ok(_alugarRepository.GetAlugueisByLivroIdByPeriodo(livroId, dataInicio, dataFim));
+        }
+
+
+        [HttpPost]
+        public IActionResult GetAlugueisByPeriodo(DateTime dataInicio, DateTime dataFim){
+            return Ok(_alugarRepository.GetAlugueisByPeriodo(dataInicio, dataFim));
         }
     }
 }

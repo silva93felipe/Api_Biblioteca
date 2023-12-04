@@ -9,22 +9,33 @@ namespace api_biblioteca.Repositories
 {
     public class AlugarRepository
     {
-         public void Alugar(Aluguel aluguel){
+        public void Alugar(Guid livroId){
+            var aluguel = new Aluguel(livroId);
+
             BibliotecaContext.Alugueis.Add(aluguel);  
         }
-        public void Devolver(int livroId, DateTime dataEntrega){
-            var livro = BibliotecaContext.Alugueis.Find(l => l.LivroId == livroId && l.Ativo);
-            if(livro != null){
-                livro.Ativo = false;
-                livro.DataEntrega = dataEntrega;
-            }
+
+        public void Devolver(Guid livroId){
+            var aluguel = BibliotecaContext.Alugueis.Find(l => l.LivroId == livroId && l.Ativo);
+
+            aluguel?.Entregar();
+            
         }
         public IEnumerable<Aluguel> GetAll(){
-            return BibliotecaContext.Alugueis.Where( a => a.DataEntrega == null && !a.Ativo);
+            return BibliotecaContext.Alugueis.Where( a => a.DataEntrega == null && a.Ativo);
         }
 
-        public IEnumerable<Aluguel> GetAlugueisByLivroId(int livroId){
-            return BibliotecaContext.Alugueis.Where( a => a.LivroId == livroId);
+        public Aluguel? GetAluguelByLivroId(Guid livroId){
+            return BibliotecaContext.Alugueis.Find( a => a.LivroId == livroId && !a.DataEntrega.HasValue && a.Ativo);
+        }
+
+        public IEnumerable<Aluguel> GetAlugueisByLivroIdByPeriodo(Guid livroId, DateTime dataInicial, DateTime dataFinal){
+            return BibliotecaContext.Alugueis.Where( a => a.LivroId == livroId && a.DataInicial.Date >= dataInicial.Date && a.DataInicial.Date <= dataFinal.Date);
+        }
+
+
+        public IEnumerable<Aluguel> GetAlugueisByPeriodo(DateTime dataInicial, DateTime dataFinal){
+            return BibliotecaContext.Alugueis.Where( a => a.DataInicial.Date >= dataInicial.Date && a.DataInicial.Date <= dataFinal.Date);
         }
     }
 }

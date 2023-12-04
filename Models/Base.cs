@@ -5,16 +5,22 @@ using System.Threading.Tasks;
 
 namespace api_biblioteca.Models
 {
-    public class Base<T>
+    public abstract class Base<T>
     {
-        public T Id { get; set; }
-        public bool Ativo { get; set; }
-        public DateTime CreateAt { get; set; }
+        public Guid Id { get; init; }
+        public bool Ativo { get; private set; }
+        public DateTime CreateAt { get; private set; }
         public DateTime UpdateAt { get; set; }
 
         public Base(){
+            Id = Guid.NewGuid();
             Ativo = true;
             CreateAt = DateTime.Now;
+            UpdateAt = DateTime.Now;
+        }
+
+        public virtual void Inativar(){
+            Ativo = false;
             UpdateAt = DateTime.Now;
         }
     }
