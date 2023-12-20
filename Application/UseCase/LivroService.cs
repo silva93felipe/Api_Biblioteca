@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace api_biblioteca.Services
+namespace Application.Services
 {
-    public class AlugarService
+    public class LivroService
     {
         
     }

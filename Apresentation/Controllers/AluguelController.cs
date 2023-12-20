@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api_biblioteca.Repositories;
+using Infra.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace api_biblioteca.Controllers
+namespace Apresentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -1,4 +1,4 @@
-namespace api_biblioteca.Models
+namespace Domain.Models
 {
     public class Livro : Base<Guid>
     {

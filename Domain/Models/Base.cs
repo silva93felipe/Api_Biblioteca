@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace api_biblioteca.Models
+namespace Domain.Models
 {
     public abstract class Base<T>
     {

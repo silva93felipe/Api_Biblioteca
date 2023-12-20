@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api_biblioteca.Context;
-using api_biblioteca.Models;
+using Infra.Context;
+using Domain.Models;
+using Domain.Interfaces;
 
-namespace api_biblioteca.Repositories
+namespace Infra.Repositories
 {
-    public class AlugarRepository
+    public class AlugarRepository : IAlugarRepository
     {
         public void Alugar(Guid livroId){
             var aluguel = new Aluguel(livroId);
-
             BibliotecaContext.Alugueis.Add(aluguel);  
         }
 

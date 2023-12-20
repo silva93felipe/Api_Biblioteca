@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api_biblioteca.Context;
-using api_biblioteca.Models;
+using Infra.Context;
+using Domain.Models;
 
-namespace api_biblioteca.Repositories
+namespace Infra.Repositories
 {
     public class LivroRepository
     {
@@ -43,6 +43,5 @@ namespace api_biblioteca.Repositories
                 livro.Devolver();
             }
         }
-
     }
 }
