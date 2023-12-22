@@ -1,0 +1,12 @@
+create table Livro (
+	Id integer primary key autoincrement,
+	Ativo boolean default(1),
+	CreatAt datetime,
+	UpdateAt datetime,
+	Titulo varchar(30),
+	Autor varchar(20),
+	AnoLancamento varchar(4),
+	Resumo varchar(200),
+	IsAlugado boolean default(0)
+)
+

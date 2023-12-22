@@ -4,7 +4,7 @@ using Domain.Interfaces;
 
 namespace Infra.Repositories
 {
-    public class AlugarRepository : IAlugarRepository
+    public class AlugarRepository //: IAlugarRepository
     {
         public void Alugar(Guid livroId){
             var aluguel = new Aluguel(livroId);

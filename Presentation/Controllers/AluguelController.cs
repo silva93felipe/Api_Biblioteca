@@ -11,32 +11,41 @@ namespace Apresentation.Controllers
     [Route("api/[controller]")]
     public class AluguelController : ControllerBase
     {
-        private readonly AlugarRepository _alugarRepository;
+        //private readonly AlugarRepository _alugarRepository;
 
         public AluguelController()
         {
-            _alugarRepository =  new AlugarRepository();
+            //_alugarRepository =  new AlugarRepository();
         }
 
         [HttpGet]
         public IActionResult GetAll(){
-            return Ok(_alugarRepository.GetAll());
+            
+            return Ok(
+                // _alugarRepository.GetAll()
+                );
         }
 
         [HttpGet("{livroId}")]
         public IActionResult GetAluguelByLivroId(Guid livroId){
-            return Ok(_alugarRepository.GetAluguelByLivroId(livroId));
+            return Ok(
+                // _alugarRepository.GetAluguelByLivroId(livroId)
+                );
         }
 
         [HttpGet("{livroId}")]
         public IActionResult GetAlugueisByLivroIdByPeriodo(Guid livroId, DateTime dataInicio, DateTime dataFim){
-            return Ok(_alugarRepository.GetAlugueisByLivroIdByPeriodo(livroId, dataInicio, dataFim));
+            return Ok(
+                // _alugarRepository.GetAlugueisByLivroIdByPeriodo(livroId, dataInicio, dataFim)
+                );
         }
 
 
         [HttpPost]
         public IActionResult GetAlugueisByPeriodo(DateTime dataInicio, DateTime dataFim){
-            return Ok(_alugarRepository.GetAlugueisByPeriodo(dataInicio, dataFim));
+            return Ok(
+                // _alugarRepository.GetAlugueisByPeriodo(dataInicio, dataFim)
+                );
         }
     }
 }

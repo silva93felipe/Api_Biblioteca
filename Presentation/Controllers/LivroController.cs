@@ -12,33 +12,34 @@ namespace Apresentation.Controllers
     [Route("api/[controller]")]
     public class LivroController : ControllerBase
     {
-        private readonly LivroRepository _livroRepository;
-        public LivroController()
-        {
-            _livroRepository = new LivroRepository();
-        }
+        // private readonly LivroRepository _livroRepository;
+        // public LivroController()
+        // {
+        //     _livroRepository = new LivroRepository();
+        // }
 
         [HttpGet]
-        public IActionResult GetAllAvailable() => Ok(_livroRepository.GetAllLivros());
+        public IActionResult GetAllAvailable() => Ok();
 
 
         [HttpPost]
         public IActionResult Create(Livro livro){
-            _livroRepository.Create(livro);
-            return NoContent();
+            Console.WriteLine(livro.Autor);
+            //_livroRepository.Create(livro);
+            return Ok();
         }
 
 
         [HttpPost("Alugar")]
         public IActionResult Alugar(Guid livroId){
 
-            _livroRepository.Alugar(livroId);
+            //_livroRepository.Alugar(livroId);
             return NoContent();
         }
 
         [HttpPost("Devolver")]
         public IActionResult Devolver(Guid livroId){ 
-            _livroRepository.Devolver(livroId);
+            //_livroRepository.Devolver(livroId);
             return NoContent();
         }
 
